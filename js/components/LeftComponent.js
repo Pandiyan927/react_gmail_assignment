@@ -1,5 +1,5 @@
 var React=require("react");
-var LabelComponent=require('./LabelComponent');
+var LeftLabelComponent=require('./LeftLabelComponent');
 
 
 
@@ -7,9 +7,9 @@ console.log("Inside Left Panel");
 var LeftComponent=React.createClass({
 	
 	render:function(){
-		var idName = this.props.processed_data.map(function(id_and_name) {
+		var idName = this.props.processed_labels.map(function(id_and_name) {
     		return (
-       			<LabelComponent id={id_and_name.id} name={id_and_name.name} />
+       			<LeftLabelComponent id={id_and_name.id} name={id_and_name.name} />
       		);
     	});
 
