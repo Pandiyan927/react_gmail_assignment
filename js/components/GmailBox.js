@@ -84,7 +84,7 @@ var GmailBox = React.createClass({
   {
     var accessToken = localStorage.getItem('gToken');
       $.ajax({
-      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages?labelIds=INBOX&key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
       dataType: 'json',
       type: 'GET',
       beforeSend: function (request)
@@ -103,7 +103,7 @@ var GmailBox = React.createClass({
 
 
 
-      
+
     });
 
 
@@ -132,7 +132,7 @@ var GmailBox = React.createClass({
               <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign In</button>
             </div>
             <div className="col-md-10 pull-right">
-              <h2>ReactMails 123333</h2>
+              <h2>ReactMails  8766</h2>
             </div>
           </div>
           <div className="row">

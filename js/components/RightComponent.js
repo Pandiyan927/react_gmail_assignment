@@ -7,16 +7,35 @@ console.log("Inside Left Panel");
 
 
 var requiredData=[];
-
+var idAndThreadid;
 var RightComponent=React.createClass({
   getInitialState: function()
   {
     return({allMessagesData:[]});
   },
 
+  componentDidMount: function() {
+
+  	var that =this;
+    idAndThreadid = this.props.processed_idsAndThreadsids.map(function(idThreadid) {
+
+    console.log("inside render");
+    
+   	console.log(idThreadid.id);
+
+   	that.allMessages(idThreadid.id);
+
+   	console.log("calling the 3rd ajax method");
+    return (
+       	<RightLabelComponent messages={that.state.allMessagesData} />
+      );
+   	});
+   	console.log("end of component did mount")
+  },
+
   allMessages: function(id)
   {
-  	var againThat=this;
+  	var again=this;
   	console.log(id);
     var accessToken = localStorage.getItem('gToken');
       $.ajax({
@@ -46,14 +65,14 @@ var RightComponent=React.createClass({
 
        //req2.push(requiredData);
        
-       againThat.setState({allMessagesData:requiredData});
+       again.setState({allMessagesData:requiredData});
 
        console.log(allMessagesData[0]);
         loadedData=true;
-      }.bind(againThat),
+      }.bind(again),
       error: function(xhr, status, err) {
        console.error(err.toString());
-      }.bind(againThat)
+      }.bind(again)
     });
 
   },
@@ -61,18 +80,7 @@ var RightComponent=React.createClass({
 
 	
 	render:function(){
-		var that=this;
 
-    	var idAndThreadid = this.props.processed_idsAndThreadsids.map(function(idThreadid) {
-
-    		console.log("inside render");
-    		console.log(idThreadid.id);
-    		that.allMessages(idThreadid.id);
-    		console.log("calling the 3rd ajax method");
-    		return (
-       			<RightLabelComponent messages={that.state.allMessagesData} />
-      		);
-    	});
 
 		return(
 			<div>
@@ -82,6 +90,7 @@ var RightComponent=React.createClass({
 							<h3 className="text-center">
 								Right Panel
 							</h3>
+							<h3>inside render</h3>
 							<h3>
 							{idAndThreadid}
 							</h3>
