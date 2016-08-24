@@ -4,8 +4,7 @@ var LeftLabelComponent=React.createClass({
 	render:function(){
 		return(
 			<div>
-				<a href="#" id={this.props.id}>Name:{this.props.name}</a>
-
+				<button className="btn btn-success"id={this.props.id}>{this.props.name}</button>
 			</div>
 		);
 	}
