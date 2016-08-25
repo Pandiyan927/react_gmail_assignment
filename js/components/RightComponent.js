@@ -1,86 +1,96 @@
 var React=require("react");
 var RightLabelComponent=require('./RightLabelComponent');
 
+var loadedData = false;
+
 
 
 console.log("Inside Left Panel");
 
-
 var requiredData=[];
-var idAndThreadid;
+
 var RightComponent=React.createClass({
   getInitialState: function()
   {
     return({allMessagesData:[]});
   },
 
-  componentDidMount: function() {
+  componentWillMount: function() {
 
-  	var that =this;
-    idAndThreadid = this.props.processed_idsAndThreadsids.map(function(idThreadid) {
-
-    console.log("inside render");
+    console.log("start of componentwill mount");
     
-   	console.log(idThreadid.id);
-
-   	that.allMessages(idThreadid.id);
-
-   	console.log("calling the 3rd ajax method");
-    return (
-       	<RightLabelComponent messages={that.state.allMessagesData} />
-      );
-   	});
-   	console.log("end of component did mount")
+    this.allMessages();
+   	console.log("end of component will mount");
   },
 
-  allMessages: function(id)
-  {
-  	var again=this;
-  	console.log(id);
-    var accessToken = localStorage.getItem('gToken');
-      $.ajax({
-      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages/'+id+'?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
-      dataType: 'json',
-      type: 'GET',
-      beforeSend: function (request)
-      {
-        request.setRequestHeader("Authorization", "Bearer "+accessToken);
-      },
-      success: function(data)
-      {
-       
-        
-        var fromValue;
-        var subjValue;
-        var dateValue;
-        for(var j=0;j < data.payload.headers.length;j++){
-          if(data.payload.headers[j].name=="From")
-            fromValue=data.payload.headers[j].value;
-          if(data.payload.headers[j].name=="Subject")
-            subjValue=data.payload.headers[j].value;
-          if(data.payload.headers[j].name=="Date")
-             dateValue=data.payload.headers[j].value;
-        }
-       requiredData.push({"fromValue":fromValue,"subjValue":subjValue,"dateValue":dateValue});
+  allMessages:function(){
+    console.log("inside allMessages function");
+    var that =this;
+    console.log("calling map");
+    that.props.processed_idsAndThreadsids.map(function(idThreadid) {
 
-       //req2.push(requiredData);
-       
-       again.setState({allMessagesData:requiredData});
+          
+          var id=idThreadid.id
+          console.log("inside map");
+          console.log(id);
+          console.log("calling ajax")
+          var accessToken = localStorage.getItem('gToken');
+            $.ajax({
+                url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages/'+id+'?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+                dataType: 'json',
+                type: 'GET',
+                async:'false',
+                beforeSend: function (request)
+                {
+                  console.log("inside before send");
+                  request.setRequestHeader("Authorization", "Bearer "+accessToken);
+                },
+                success: function(data)
+                {
+                  console.log("inside ajax inside success function");
+                  var fromValue;
+                  var subjValue;
+                  var dateValue;
+                  for(var j=0;j < data.payload.headers.length;j++){
+                    if(data.payload.headers[j].name=="From")
+                      fromValue=data.payload.headers[j].value;
+                    if(data.payload.headers[j].name=="Subject")
+                      subjValue=data.payload.headers[j].value;
+                    if(data.payload.headers[j].name=="Date")
+                       dateValue=data.payload.headers[j].value;
+                  }
+                 requiredData.push({"fromValue":fromValue,"subjValue":subjValue,"dateValue":dateValue});
+                 console.log(requiredData[0].fromValue);
+                 that.setState({allMessagesData:requiredData});
+                 console.log("printing allmessages data's from value");
+                 console.log(allMessagesData[0].fromValue);
+                 loadedData=true;
+                 }.bind(that),
+                 error: function(xhr, status, err) {
+                 console.error(err.toString());
+                 }.bind(that)
+            });//end of ajax
+          console.log("end of ajax")
+          console.log("iterating the map now after returnstatement")
+          return (
+           that
+           );
 
-       console.log(allMessagesData[0]);
-        loadedData=true;
-      }.bind(again),
-      error: function(xhr, status, err) {
-       console.error(err.toString());
-      }.bind(again)
-    });
+    });//end of map
 
   },
-
 
 	
 	render:function(){
 
+
+    console.log("inside render")
+
+    var fromSubjDate = this.state.allMessagesData.map(function(fSD) {
+      return (
+        <RightLabelComponent fromValue={fSD.fromValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} />
+      );
+    });
 
 		return(
 			<div>
@@ -90,9 +100,9 @@ var RightComponent=React.createClass({
 							<h3 className="text-center">
 								Right Panel
 							</h3>
-							<h3>inside render</h3>
+							<h3>Inbox</h3>
 							<h3>
-							{idAndThreadid}
+							{fromSubjDate}
 							</h3>
 						</div>
 					</div>

@@ -1,35 +1,23 @@
 var React=require("react");
-var RightLabelChildComponent=require('./RightLabelChildComponent');
 
 
+
+console.log("Inside Left Panel");
 var RightLabelComponent=React.createClass({
-	render:function(){
-		var fromSubjDate = this.props.messages.map(function(fSD) {
-    		return (
-       			<RightLabelChildComponent fromValue={fSD.fromValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} />
-      		);
-    	});
+	
 
+	
+	render:function(){
 		return(
 			<div>
-				<div className="container-fluid">
-					<div className="row">
-						<div className="col-md-12">
-							<h3 className="text-center">
-								Right Panel
-							</h3>
-							<h3>
-							{fromSubjDate}
-							</h3>
-							
-						</div>
-					</div>
-				</div>
+				<h6>{this.props.fromValue}</h6>
+				<h6>{this.props.subjValue}</h6>
+				<h6>{this.props.dateValue}</h6>
+				<hr></hr>
+
 			</div>
-		
 		);
 	}
-
 });
 
 module.exports=RightLabelComponent;
