@@ -7,9 +7,10 @@ console.log("Inside Left Panel");
 var LeftComponent=React.createClass({
 	
 	render:function(){
+		var a=this.props.labelIds;
 		var idName = this.props.processed_labels.map(function(id_and_name) {
     		return (
-       			<LeftLabelComponent id={id_and_name.id} name={id_and_name.name} />
+       			<LeftLabelComponent id={id_and_name.id} name={id_and_name.name} labelIdds={a} />
       		);
     	});
 

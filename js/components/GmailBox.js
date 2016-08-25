@@ -4,6 +4,7 @@ var NavComponent=require('./NavComponent');
 var LeftComponent=require('./LeftComponent');
 var RightComponent=require('./RightComponent');
 var loadedData = false;
+var requiredData=[];
 
 var GmailBox = React.createClass({
   getInitialState: function()
@@ -90,7 +91,7 @@ var GmailBox = React.createClass({
       beforeSend: function (request)
       {
         request.setRequestHeader("Authorization", "Bearer "+accessToken);
-     },
+      },
       success: function(data)
       {
        this.setState({allIdsThreadidsData:data.messages});
@@ -99,17 +100,40 @@ var GmailBox = React.createClass({
       error: function(xhr, status, err) {
        console.error(err.toString());
       }.bind(this)
-
-
-
-
-
     });
+  },
+
+  allIdsThreadidsForParticularLabels: function(id)
+  {
+    var idd=id
+    console.log("inside allIdsThreadidsForParticularLabels in gmailBox js ")
+    console.log("printing id here");
+    console.log(idd);
+    console.log("calling ajax now");
+    var accessToken = localStorage.getItem('gToken');
+      $.ajax({
+      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages?labelIds='+idd+'&key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+      dataType: 'json',
+      type: 'GET',
+      beforeSend: function (request)
+      {
+        request.setRequestHeader("Authorization", "Bearer "+accessToken);
+      },
+      success: function(data)
+      {
+      console.log("inside success function of allIdsThreadidsForParticularLabels");
+       this.setState({allIdsThreadidsData:data.messages});
+       loadedData=true;
+      }.bind(this),
+      error: function(xhr, status, err) {
+       console.error(err.toString());
+      }.bind(this)
+    });
+  },
 
 
 
-    
-  },  
+
 
 
   render:function()
@@ -119,7 +143,7 @@ var GmailBox = React.createClass({
 
     if(loadedData)
     {
-      leftPanel =  <LeftComponent processed_labels={this.state.allLabelsData} />
+      leftPanel =  <LeftComponent processed_labels={this.state.allLabelsData} labelIds={this.allIdsThreadidsForParticularLabels} />
       rightPanel=  <RightComponent processed_idsAndThreadsids={this.state.allIdsThreadidsData} />
 
     }
@@ -129,10 +153,10 @@ var GmailBox = React.createClass({
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2">
-              <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign In</button>
+              <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign jjjIn</button>
             </div>
             <div className="col-md-10 pull-right">
-              <h2>ReactMails Using dev.pandian927</h2>
+              <h2>ReactMails 111111 Using dev.pandian927</h2>
             </div>
           </div>
           <div className="row">

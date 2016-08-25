@@ -7,7 +7,7 @@ var loadedData = false;
 
 console.log("Inside Left Panel");
 
-var requiredData=[];
+
 
 var RightComponent=React.createClass({
   getInitialState: function()
@@ -18,18 +18,26 @@ var RightComponent=React.createClass({
   componentWillMount: function() {
 
     console.log("start of componentwill mount");
-    
+
     this.allMessages();
    	console.log("end of component will mount");
+  },
+  componentWillReceiveProps  : function() {
+
+    console.log("start of componentWillReceiveProps");
+
+    this.allMessages();
+    console.log("end of componentWillReceiveProps");
   },
 
   allMessages:function(){
     console.log("inside allMessages function");
     var that =this;
+    var requiredData=[];
     console.log("calling map");
     that.props.processed_idsAndThreadsids.map(function(idThreadid) {
 
-          
+
           var id=idThreadid.id
           console.log("inside map");
           console.log(id);
@@ -74,17 +82,17 @@ var RightComponent=React.createClass({
           console.log("iterating the map now after returnstatement")
           return (
            that
-           );
+          );
 
     });//end of map
 
   },
 
-	
+
 	render:function(){
 
 
-    console.log("inside render")
+    console.log("inside right component render")
 
     var fromSubjDate = this.state.allMessagesData.map(function(fSD) {
       return (
@@ -100,7 +108,6 @@ var RightComponent=React.createClass({
 							<h3 className="text-center">
 								Right Panel
 							</h3>
-							<h3>Inbox</h3>
 							<h3>
 							{fromSubjDate}
 							</h3>
@@ -108,7 +115,7 @@ var RightComponent=React.createClass({
 					</div>
 				</div>
 			</div>
-		
+
 		);
 	}
 });
