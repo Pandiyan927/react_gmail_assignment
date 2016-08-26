@@ -24,11 +24,7 @@ var RightComponent=React.createClass({
   },
 
 
-  shouldComponentUpdate: function(nextProps, nextState) {
-    // You can access `this.props` and `this.state` here
-    // This function should return a boolean, whether the component should re-render.
-    return true;
-  },
+
 
   componentWillReceiveProps  : function() {
 
