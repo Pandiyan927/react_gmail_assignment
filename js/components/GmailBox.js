@@ -153,10 +153,10 @@ var GmailBox = React.createClass({
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-2">
-              <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign jjjIn</button>
+              <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign In</button>
             </div>
             <div className="col-md-10 pull-right">
-              <h2>ReactMails 111111 Using dev.pandian927</h2>
+              <h2>ReactMails 222 Using dev.pandian927</h2>
             </div>
           </div>
           <div className="row">
