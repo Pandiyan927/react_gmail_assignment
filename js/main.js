@@ -123,7 +123,8 @@ var MainComponent=React.createClass({
 		console.log(parsedData[1].id)
 		return(
 			<div>
-				<div className="container">
+				<div className="container-fluid">
+        <NavComponent />
 					<div className="container-fluid">
 						<div className="row">
 							<div className="col-md-12">

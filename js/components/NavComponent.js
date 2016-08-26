@@ -13,7 +13,7 @@ var NavComponent=React.createClass({
 									 
 									<button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
 										 <span className="sr-only">Toggle navigation</span><span className="icon-bar"></span><span className="icon-bar"></span><span className="icon-bar"></span>
-									</button> <a className="navbar-brand" href="#">WildLife</a>
+									</button> <a className="navbar-brand" href="#">LifeMail</a>
 								</div>
 								
 								<div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
