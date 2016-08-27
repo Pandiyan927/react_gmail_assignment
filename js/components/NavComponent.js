@@ -43,15 +43,6 @@ var NavComponent=React.createClass({
 											</ul>
 										</li>
 									</ul>
-
-									<form className="navbar-form navbar-left pull-right" role="search">
-										<div className="form-group">
-											<input type="text" className="form-control" />
-										</div> 
-										<button type="submit" className="btn btn-default">
-											Submit
-										</button>
-									</form>
 								</div>
 
 

@@ -34,6 +34,25 @@ var RightComponent=React.createClass({
     console.log("end of componentWillReceiveProps");
   },
 
+  getHTMLPart: function(partsArr)
+  {
+    for(var i=0;i<=partsArr.length;i++)
+    {
+      if(typeof partsArr[i].parts === 'undefined')
+      {
+        if(partsArr[i].mimeType === 'text/html')
+        {
+          return partsArr[i].body.data;
+        }
+      }
+      else
+      {
+        return this.getHTMLPart(partsArr[i].parts);
+      }
+    }
+    return '';
+  },
+
   allMessages:function(){
     console.log("inside allMessages function");
     var that =this;
@@ -48,7 +67,7 @@ var RightComponent=React.createClass({
           console.log("calling ajax")
           var accessToken = localStorage.getItem('gToken');
             $.ajax({
-                url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages/'+id+'?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+                url: 'https://www.googleapis.com/gmail/v1/users/me/messages/'+id+'?key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
                 dataType: 'json',
                 type: 'GET',
                 async:'false',
@@ -59,6 +78,19 @@ var RightComponent=React.createClass({
                 },
                 success: function(data)
                 {
+
+                  var encodedBody;
+                  if(typeof data.payload.parts === 'undefined')
+                  {
+                    encodedBody = data.payload.body.data;
+                  }
+                  else
+                  {
+                    encodedBody = that.getHTMLPart(data.payload.parts);
+                  }
+
+
+
                   console.log("inside ajax inside success function");
                   var fromValue;
                   var subjValue;
@@ -80,12 +112,12 @@ var RightComponent=React.createClass({
                     if(data.labelIds[i] == "INBOX"|| data.labelIds[i] == "TRASH")
                     {
                       console.log("inortr");
-                      requiredData.push({"fromValue":fromValue,"subjValue":subjValue,"dateValue":dateValue});
+                      requiredData.push({"fromValue":fromValue,"subjValue":subjValue,"dateValue":dateValue, "encodedbody":encodedBody});
                     }
                     if(data.labelIds[i] == "SENT" || data.labelIds[i] == "DRAFT")
                     {
                       console.log("sedr");
-                      requiredData.push({"toValue":toValue,"subjValue":subjValue,"dateValue":dateValue});
+                      requiredData.push({"toValue":toValue,"subjValue":subjValue,"dateValue":dateValue,"encodedbody":encodedBody});
                     }
                   }
                  
@@ -119,14 +151,14 @@ var RightComponent=React.createClass({
       if(fSD.fromValue)
       {
        return(
-         <RightLabelComponent fromValue={fSD.fromValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} />
+         <RightLabelComponent fromValue={fSD.fromValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} encodedBody={fSD.encodedbody} />
        );
       }
 
       if(fSD.toValue)
       {
         return(
-          <RightLabelComponent fromValue={fSD.toValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} />
+          <RightLabelComponent fromValue={fSD.toValue} subjValue={fSD.subjValue} dateValue={fSD.dateValue} encodedBody={fSD.encodedbody} />
         );
       }
     });

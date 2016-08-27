@@ -124,14 +124,8 @@ var MainComponent=React.createClass({
 		return(
 			<div>
 				<div className="container-fluid">
-        <NavComponent />
-					<div className="container-fluid">
-						<div className="row">
-							<div className="col-md-12">
-								<GmailBox />
-							</div>
-						</div>
-					</div>
+          <NavComponent />
+          <GmailBox />
 				</div>	
 			</div>
 		);

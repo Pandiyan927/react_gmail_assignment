@@ -16,7 +16,7 @@ var GmailBox = React.createClass({
     var acToken, tokenType, expiresIn;
     var OAUTHURL    =   'https://accounts.google.com/o/oauth2/v2/auth?';
     var SCOPE       =   'https://mail.google.com/ https://www.googleapis.com/auth/gmail.readonly';
-    var CLIENTID    =   '213580555987-vgopfl8ab3an3sheqnan2skrtjmg5tr5.apps.googleusercontent.com';
+    var CLIENTID    =   '383293676213-4g485arsbrc2f8sahmfu0n3h3f25bkhr.apps.googleusercontent.com';
     var REDIRECT    =   'http://localhost:8081';
     var TYPE        =   'token';
     var _url        =   OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
@@ -62,7 +62,7 @@ var GmailBox = React.createClass({
   {
     var accessToken = localStorage.getItem('gToken');
     $.ajax({
-      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/labels?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+      url: 'https://www.googleapis.com/gmail/v1/users/me/labels?key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
       dataType: 'json',
       type: 'GET',
       beforeSend: function (request)
@@ -85,7 +85,7 @@ var GmailBox = React.createClass({
   {
     var accessToken = localStorage.getItem('gToken');
       $.ajax({
-      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages?labelIds=INBOX&key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+      url: 'https://www.googleapis.com/gmail/v1/users/me/messages?labelIds=INBOX&key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
       dataType: 'json',
       type: 'GET',
       beforeSend: function (request)
@@ -112,7 +112,7 @@ var GmailBox = React.createClass({
     console.log("calling ajax now");
     var accessToken = localStorage.getItem('gToken');
       $.ajax({
-      url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages?labelIds='+idd+'&key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+      url: 'https://www.googleapis.com/gmail/v1/users/me/messages?labelIds='+idd+'&key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
       dataType: 'json',
       type: 'GET',
       beforeSend: function (request)
@@ -152,18 +152,18 @@ var GmailBox = React.createClass({
       <div className="GmailBox">
         <div className="container-fluid">
           <div className="row">
-            <div className="col-md-2">
+            <div className="col-sm-2">
               <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign In</button>
             </div>
-            <div className="col-md-10 pull-right">
-              <h2 className="text-center" id="heading">ReactMails  78787 Using dev.pandian927</h2>
+            <div className="col-sm-10 pull-right">
+              <h2 className="text-center" id="heading">ReactMails 222 Using dev.pandian927</h2>
             </div>
           </div>
           <div className="row">
-            <div className="col-md-4">
+            <div className="col-md-2">
               {leftPanel}
             </div>
-            <div className="col-md-8">
+            <div className="col-md-10">
               {rightPanel}
             </div>
           </div>

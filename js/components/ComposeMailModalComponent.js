@@ -39,7 +39,7 @@ var ComposeMailModalComponent=React.createClass({
       console.log("constructed email: " +email);
       var encodedMessage =  window.btoa(email).replace(/\+/g, '-').replace(/\//g, '_');
       $.ajax({
-            url: 'https://www.googleapis.com/gmail/v1/users/dev.pandian927%40gmail.com/messages/send?key={AIzaSyBGQSYqG79hQKBmupvuo8a5WpnFhPedcSo}',
+            url: 'https://www.googleapis.com/gmail/v1/users/me/messages/send?key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
             dataType: 'json',
             contentType: "application/json",
             type: 'POST',
@@ -63,7 +63,7 @@ var ComposeMailModalComponent=React.createClass({
     render:function(){
         return(
             <div>
-                <a href="#myModal" role="button" className="btn btn-warning" data-toggle="modal"><span className="glyphicon glyphicon-hand-up"></span> Compose mail</a>
+                <a href="#myModal" role="button" className="btn btn-warning btn-block" data-toggle="modal"><span className="glyphicon glyphicon-hand-up"></span> Compose mail</a>
 
                             <div className="modal fade" id="myModal">
                                 <div className="modal-dialog">

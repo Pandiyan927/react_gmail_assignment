@@ -16,7 +16,13 @@ var LeftLabelComponent=React.createClass({
 	render:function(){
 		return(
 			<div>
-				<button className="btn btn-success"id={this.props.id}  onClick={() => this.handleClick(this.props.id)}>{this.props.name}</button>
+				  <table className="table table-responsive table-hover col-md-12">
+					<tbody>
+					  <tr>
+						<td><button className="btn btn-success btn-block"id={this.props.id}  onClick={() => this.handleClick(this.props.id)}>{this.props.name}</button></td>
+					  </tr>
+					</tbody>
+				  </table>
 			</div>
 		);
 	}
