@@ -34,7 +34,7 @@ var RightComponent=React.createClass({
     console.log("end of componentWillReceiveProps");
   },
 
-  getHTMLPart: function(partsArr)
+  getEncodedData: function(partsArr)
   {
     for(var i=0;i<=partsArr.length;i++)
     {
@@ -47,7 +47,7 @@ var RightComponent=React.createClass({
       }
       else
       {
-        return this.getHTMLPart(partsArr[i].parts);
+        return this.getEncodedData(partsArr[i].parts);
       }
     }
     return '';
@@ -86,10 +86,8 @@ var RightComponent=React.createClass({
                   }
                   else
                   {
-                    encodedBody = that.getHTMLPart(data.payload.parts);
+                    encodedBody = that.getEncodedData(data.payload.parts);
                   }
-
-
 
                   console.log("inside ajax inside success function");
                   var fromValue;
