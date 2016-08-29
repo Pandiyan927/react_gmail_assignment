@@ -1,21 +1,17 @@
 var React=require("react");
 var ReactDom=require("react-dom");
-var {browserHistory, Route, Router, IndexRoute}=require('react-router');
+var {hashHistory, Route, Router, IndexRoute}=require('react-router');
 
+var NavComponent=require('./components/NavComponent');
 var Home=require('./components/Home');
 var AboutUS=require('./components/AboutUs');
-var NavComponent=require('./components/NavComponent');
-
-
 var GmailBox=require('./components/GmailBox');
-
 
 var MainComponent=React.createClass({
 	render:function(){
-		console.log("Inside Main Render");
 		return(
 			<div>
-				<div className="container-fluid">
+				<div >
           <NavComponent />
           <br />
           <br />
@@ -27,7 +23,7 @@ var MainComponent=React.createClass({
 	}
 });
 
-ReactDom.render(<Router history={browserHistory}>
+ReactDom.render(<Router history={hashHistory}>
                     <Route path="/" component={MainComponent}>
                       <IndexRoute component={Home}/>
                       <Route path="/home" component={Home} />
