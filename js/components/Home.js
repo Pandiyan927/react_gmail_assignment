@@ -75,14 +75,15 @@ var Home = React.createClass({
         <div>
           <h2>Home</h2>
 
-          <button className="btn btn-warning" onClick="{this.getData}">Get Data</button>
-          <h1>{this.state.getData}</h1>
+          <button className="btn btn-warning" onClick={this.getData}>Get Data</button>
 
-           <button className="btn btn-warning" onClick="{this.updateData}">Update data</button>
-          <h1>{this.state.updateData}</h1>
+          <h4>{this.state.getData}</h4>
 
-           <button className="btn btn-warning" onClick="{this.deleteData}">Delete Data</button>
-          <h1>{this.state.deleteData}</h1>
+           <button className="btn btn-warning" onClick={this.updateData}>Update data</button>
+          <h4>{this.state.updateData}</h4>
+
+           <button className="btn btn-warning" onClick={this.deleteData}>Delete Data</button>
+          <h4>{this.state.deleteData}</h4>
 
         </div>
       </div>

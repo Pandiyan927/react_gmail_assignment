@@ -20,7 +20,7 @@ var NavComponent=React.createClass({
 									<ul className="nav navbar-nav navbar-right">
 
 										<li>
-											<NavLink to="/home">Home1111</NavLink>
+											<NavLink to="/home">Home</NavLink>
 										</li>
 										<li>
 											<NavLink to="/gmailbox">Gmail</NavLink>
