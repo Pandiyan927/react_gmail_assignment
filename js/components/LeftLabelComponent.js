@@ -15,6 +15,7 @@ var LeftLabelComponent=React.createClass({
 
 	render:function(){
 		return(
+
 			<div>
 				  <table className="table table-responsive table-hover col-md-12">
 					<tbody>

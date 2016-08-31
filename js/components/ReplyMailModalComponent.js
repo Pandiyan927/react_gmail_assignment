@@ -15,7 +15,7 @@ var ReplyMailModalComponent=React.createClass({
     var accessToken = localStorage.getItem('gToken');
     console.log("Access token: "+accessToken);
     var email = '';
-    var Headers = {'To': this.state.to,'Subject': this.state.subject};
+    var Headers = {'To': this.props.fromValue,'Subject': this.props.subjValue};
     for(var header in Headers)
     {
       email += header += ": "+Headers[header]+"\r\n";

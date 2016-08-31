@@ -24,7 +24,7 @@ var RightLabelComponent=React.createClass({
 		return(
 
 				<div>
-				  <table className="table table-responsive table-bordered table-hover col-md-12">
+				  <table className="table table-responsive table-bordered table-hover col-md-12 test ">
 					<tbody>
 					  <tr>
 					  	<a href="#myModalView" data-toggle="modal"  id="modal" onClick={this.changeStatusOfViewModalToTrue}>

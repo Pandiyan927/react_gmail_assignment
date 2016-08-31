@@ -157,7 +157,7 @@ var GmailBox = React.createClass({
               <button id="authorize-button" onClick={this.gmailLogin} className="btn btn-primary pull-left">Sign In</button>
             </div>
             <div className="col-sm-10 pull-right">
-              <h2 className="text-center" id="heading">ReactMails 333 Using dev.pandian927</h2>
+              <h2 className="text-center" id="heading">Click on Sign In to access Ur Life Mail</h2>
             </div>
           </div>
           <div className="row">

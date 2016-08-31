@@ -3,7 +3,7 @@ var ReplyMailModalComponent=require('./ReplyMailModalComponent');
 var ViewMailModalComponent=React.createClass({
   getInitialState:function()
   {
-    return({status:false,status2:false});
+    return({status:false});
   },
 
   appendToIframe: function(message)
@@ -15,7 +15,6 @@ var ViewMailModalComponent=React.createClass({
 
   componentDidMount: function(){
     var encodedBody = this.props.encodedBody;
-
     encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
     encodedBody = decodeURIComponent(escape(window.atob(encodedBody)));
     this.appendToIframe(encodedBody);
@@ -25,6 +24,32 @@ var ViewMailModalComponent=React.createClass({
     console.log("onclick of reply");
     this.setState({status:true});
     console.log(this.state.status);
+  },
+
+  save:function()
+  {
+    var fromVal=this.props.fromValue;
+    var subjVal=this.props.subjValue;
+    //var encodedBody=this.props.encodedBody;
+    var encodedBody = this.props.encodedBody;
+    encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+    encodedBody = decodeURIComponent(escape(window.atob(encodedBody)));
+    $.ajax({
+          //url: 'https://www.googleapis.com/gmail/v1/users/me/messages/send?key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
+          url: '/save',
+          dataType: 'json',
+          contentType: "application/json",
+          type: 'POST',
+          data: JSON.stringify({'from': fromVal,'subject':subjVal,'encodedBody':encodedBody}),
+          success: function(data)
+          {
+            console.log("Success");
+          }.bind(this),
+
+          error: function(xhr, status, err) {
+            console.error("Error.."+err.toString());
+          }.bind(this)
+        });
   },
 
   render:function(){
@@ -63,7 +88,7 @@ var ViewMailModalComponent=React.createClass({
               <div className="modal-footer">
                 <button className="btn btn-warning" type="button" data-target="#myModalreply" data-toggle="modal"  onClick={this.change}>Reply</button>
                 {this.state.status?<ReplyMailModalComponent fromValue={this.props.fromValue} subjValue={this.props.subjValue}/>:null}
-
+                <button className="btn btn-warning" type="button" onClick={this.save}>Save</button>
               </div>
             </div>
           </div>
