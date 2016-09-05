@@ -49,7 +49,7 @@ var Home = React.createClass({
       <div>
         <div className="Home">
           <div className="container-fluid">
-            <h1 className="text-center">Home 43434343</h1>
+            <h1 className="text-center">Home</h1>
             <h4>U r now viewing stored emails !!! </h4>
             <div className="row">
               <div className="col-sm-2">
