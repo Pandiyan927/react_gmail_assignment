@@ -30,17 +30,17 @@ var ViewMailModalComponent=React.createClass({
   {
     var fromVal=this.props.fromValue;
     var subjVal=this.props.subjValue;
-    //var encodedBody=this.props.encodedBody;
+    var dateVal=this.props.dateValue;
     var encodedBody = this.props.encodedBody;
-    encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
-    encodedBody = decodeURIComponent(escape(window.atob(encodedBody)));
+    //encodedBody = encodedBody.replace(/-/g, '+').replace(/_/g, '/').replace(/\s/g, '');
+    //encodedBody = decodeURIComponent(escape(window.atob(encodedBody)));
     $.ajax({
           //url: 'https://www.googleapis.com/gmail/v1/users/me/messages/send?key={AIzaSyBL7U0B65m6UmCcOTQ6SWOwHVNz0TCZOEk}',
           url: '/save',
           dataType: 'json',
           contentType: "application/json",
           type: 'POST',
-          data: JSON.stringify({'from': fromVal,'subject':subjVal,'encodedBody':encodedBody}),
+          data: JSON.stringify({'from': fromVal,'subject':subjVal, 'date':dateVal, 'message':encodedBody}),
           success: function(data)
           {
             console.log("Success");
@@ -50,6 +50,7 @@ var ViewMailModalComponent=React.createClass({
             console.error("Error.."+err.toString());
           }.bind(this)
         });
+    var change=this.props.changeStatusToFalse;
   },
 
   render:function(){
@@ -61,7 +62,7 @@ var ViewMailModalComponent=React.createClass({
             <div className="modal-content">
               <div className="modal-header">
                 <button className="close" data-dismiss="modal" onClick={this.props.changeStatusToFalse}>&times;</button>
-                <h4 className="modal-title">Compose Here !!!</h4>
+                <h4 className="modal-title">View Here !!!</h4>
               </div>
 
               <div className="modal-body">
@@ -78,6 +79,12 @@ var ViewMailModalComponent=React.createClass({
                   <div className="form-group">
                     <div className="col-lg-12">
                       <label className="control-label" for="subjVal">{this.props.subjValue}</label>
+                    </div>
+                  </div>
+
+                  <div className="form-group">
+                    <div className="col-lg-12">
+                      <label className="control-label" for="dateVal">{this.props.dateValue}</label>
                     </div>
                   </div>
 
